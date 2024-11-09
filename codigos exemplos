@@ -4,7 +4,7 @@ inicio
     inteiro a, b
     leia a, b
 
-    se (a >= b e b != 0) entao
+    se (a maiorigual b e b diferente 0) entao
         escreva 'Condicional verdadeira'
     senao
         escreva 'Condicional falsa'
@@ -18,8 +18,133 @@ inicio
     inteiro a, b, soma
     escreva "Digite dois números: "
     leia a, b
-    soma <- a + b
+    soma igual a somar b
     escreva "A soma é: ", soma
 fim
 
 
+codigo 3 >>>
+
+inicio
+    inteiro contador, numero, maiornumero
+    maiornumero igual 0
+    escreva "Digite 5 números para verificar o maior entre eles: "
+    
+    para contador de 1 ate 5 faca
+        leia numero
+        se(numero maior maiornumero)entao
+            maiornumero igual numero
+        fimse
+    fimpara
+    
+    escreva "O maior número digitado foi: ", maiornumero
+fim
+
+
+codigo 4 >>>
+
+inicio
+    inteiro contador
+    contador igual 0
+
+    enquanto (contador menor 5) faca
+        escreva "Contador: ", contador
+        contador igual  contador somar 1
+    fimenquanto
+fim
+
+
+codigo 5 >>>
+
+inicio
+    inteiro numero
+    escreva "Digite um número: "
+    leia numero
+
+    se (numero mod 2 igual igual 0) entao
+        escreva "O número é par."
+    senao
+        escreva "O número é ímpar."
+    fimse
+fim
+
+
+codigo 6 >>>
+
+inicio
+    inteiro numero, soma
+    soma igual 0
+    escreva "Digite números positivos para somar (digite um número negativo para sair): "
+    enquanto (verdadeiro) faca
+        leia numero
+        se (numero menor 0) entao
+            saia
+        fimse
+        soma igual soma somar numero
+    fimenquanto
+    escreva "A soma dos números positivos é: ", soma
+fim
+
+
+codigo 7 >>>
+
+inicio
+    inteiro numero, fatorial, i
+    escreva "Digite um número: "
+    leia numero
+    fatorial igual 1
+    para i de 1 ate numero faca
+        fatorial igual  fatorial multiplicar i
+    fimpara
+    escreva "O fatorial de ", numero, " é: ", fatorial
+fim
+
+
+codigo 8 >>>
+
+inicio
+    inteiro numero, i, divisor
+    divisor igual  0
+    escreva "Digite um número: "
+    leia numero
+    para i de 1 ate numero faca
+        se (numero mod i igual igual 0) entao
+            divisor igual divisor somar 1
+        fimse
+    fimpara
+    se (divisor igual igual  2) entao
+        escreva numero, " é primo."
+    senao
+        escreva numero, " não é primo."
+    fimse
+fim
+
+codigo 9 >>>
+
+inicio
+    inteiro numero, soma
+    soma igual 0
+    escreva "Digite números positivos para somar (digite um número negativo para sair): "
+    enquanto (verdadeiro) faca
+        leia numero
+        se (numero menor 0) entao
+            saia
+        fimse
+        soma igual somar numero
+    fimenquanto
+    escreva "A soma dos números positivos é: ", soma
+fim
+
+
+codigo 10 >>>
+
+
+inicio
+    real nota1, nota2, media
+    escreva "Digite a primeira nota: "
+    leia nota1
+    escreva "Digite a segunda nota: "
+    leia nota2
+    media igual (nota1 somar nota2) dividir 2
+    escreva "A média é: ", media
+fim
