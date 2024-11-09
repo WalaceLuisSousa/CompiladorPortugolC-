@@ -1,68 +1,128 @@
+/* Importação de fontes no início do arquivo */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Fira+Code&display=swap');
+
 /* Layout geral */
 body {
-    font-family: 'Roboto', sans-serif; /* Fonte moderna */
+    font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #1e1e1e; /* Fundo escuro */
-    color: #e0e0e0; /* Texto claro */
+    padding: 0;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Layout flexível */
 .layout {
-    display: flex; /* Flexbox para alinhar a legenda e o conteúdo */
-    justify-content: space-between;
+    display: flex;
+    flex: 1;
+    padding: 20px;
     gap: 30px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    flex-wrap: nowrap;
+}
+
+/* Biblioteca de Tokens */
+.token-library {
+    flex: 0 0 250px;
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: calc(100vh - 80px);
+}
+
+.token-library h2 {
+    text-align: center;
+    font-size: 20px;
+    color: #00e5ff;
+    margin-bottom: 15px;
+}
+
+.tokens {
+    display: flex;
     flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.token-item {
+    display: inline;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    color: #00e5ff;
+    /* Adiciona padding para melhor visualização */
+    padding: 4px 6px;
+    background-color: #3c3c3c;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+
+.token-item + .token-item::before {
+    content: " | ";
+    color: #555;
 }
 
 /* Estilo do container principal */
 .container {
     flex: 1;
-    background-color: #333;
+    background-color: #2b2b2b;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombras mais dramáticas */
-    width: 70%;
-    max-width: 850px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container:hover {
-    transform: translateY(-10px); /* Efeito de "elevação" no hover */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
 h1 {
     text-align: center;
     font-size: 36px;
-    color: #00e5ff; /* Azul neon */
+    color: #00e5ff;
     margin-bottom: 20px;
     font-weight: 700;
     letter-spacing: 2px;
+}
+
+.editor-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 textarea {
     width: 100%;
     padding: 15px;
     font-size: 16px;
-    border: 2px solid #00e5ff; /* Contorno neon */
+    border: 2px solid #00e5ff;
     border-radius: 8px;
     box-sizing: border-box;
     resize: vertical;
-    font-family: 'Courier New', monospace;
-    background-color: #222;
-    color: #fff;
+    font-family: 'Fira Code', monospace;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    height: 300px;
+    overflow: auto;
 }
 
 textarea:focus {
-    border-color: #00ff90; /* Muda a cor para um verde neon no foco */
+    border-color: #00ff90;
     outline: none;
-    box-shadow: 0 0 10px rgba(0, 255, 144, 0.6); /* Brilho ao focar */
+    box-shadow: 0 0 10px rgba(0, 255, 144, 0.6);
 }
 
-button {
+button#compileButton {
     background-color: #00e5ff;
     color: #fff;
     padding: 12px 25px;
@@ -74,136 +134,40 @@ button {
     width: 100%;
     letter-spacing: 1px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-button:hover {
+button#compileButton:hover {
     background-color: #00ff90;
-    transform: scale(1.05); /* Efeito de zoom no hover */
+    transform: scale(1.05);
 }
 
 pre {
-    background-color: #222;
+    background-color: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
     overflow-x: auto;
-    font-family: 'Courier New', monospace;
+    font-family: 'Fira Code', monospace;
     font-size: 16px;
     margin-top: 20px;
-    color: #fff;
+    color: #00ff90;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    width: 100%;
 }
 
 .errors {
-    color: #ff3d00; /* Vermelho intenso */
+    color: #ff3d00;
     font-size: 14px;
     margin-top: 10px;
-    text-align: center;
-}
-
-/* Estilo da legenda */
-.legend {
-    flex: 0 0 25%; /* A legenda ocupa 25% da largura do layout */
-    background-color: #2c2c2c; /* Fundo escuro para a legenda */
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    font-size: 16px;
-    color: #fff;
-    max-width: 320px;
-    min-width: 260px;
-    transition: transform 0.3s ease;
-}
-
-.legend:hover {
-    transform: translateY(-10px); /* Efeito de elevação no hover */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-.legend h2 {
-    text-align: center;
-    font-size: 24px;
-    color: #00e5ff; /* Azul neon */
-    margin-bottom: 20px;
-}
-
-.legend p {
-    font-size: 16px;
-    color: #bbb;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.legend ul {
-    text-align: center;
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.legend li {
-    margin-bottom: 10px;
-    padding: 12px;
+    text-align: left;
     background-color: #3c3c3c;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    font-size: 14px;
-}
-
-.legend li:hover {
-    background-color: #444;
-    transform: translateX(5px); /* Efeito de deslocamento no hover */
-}
-
-.legend code {
-    background-color: #444;
-    padding: 4px 8px;
+    padding: 10px;
     border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    color: #00e5ff; /* Azul neon para o código */
-    font-size: 15px;
-}
-
-.legend strong {
-    color: #00ff90; /* Verde neon para destaque */
-    font-weight: bold;
-}
-
-h2 {
-    text-align: center;
-}
-
-
-/* Estilo de responsividade */
-@media screen and (max-width: 900px) {
-    .layout {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .container,
-    .legend {
-        width: 100%;
-    }
-
-    .container {
-        padding: 20px;
-    }
-
-    .legend {
-        padding: 20px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .container {
-        padding: 15px;
-    }
-
-    .legend {
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
+    width: 100%;
 }
 
 /* Rodapé de Créditos */
@@ -232,4 +196,69 @@ h2 {
 .credits strong {
     color: #00ff90;
     font-weight: bold;
+}
+
+/* Estilo de responsividade */
+@media screen and (max-width: 1200px) {
+    .layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .token-library {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .container {
+        max-width: 800px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .token-library {
+        padding: 15px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .token-library {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .token-library h2 {
+        font-size: 18px;
+    }
+
+    .token-item {
+        padding: 4px 6px;
+        font-size: 12px;
+    }
+
+    button#compileButton {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    pre {
+        font-size: 14px;
+    }
 }

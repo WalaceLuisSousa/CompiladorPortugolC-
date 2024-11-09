@@ -5,58 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compilador Portugol para C++</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Importação do Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Importação do Google Fonts para fontes personalizadas -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="layout">
-        <!-- Legenda -->
-        <div class="legend">
-            <h2>Legenda</h2>
-            <p>Abaixo estão as palavras-chave do Portugol e suas equivalentes em C++:</p>
-            <ul>
-                <li><strong>inicio</strong>: <code>int main() {</code></li>
-                <li><strong>fim</strong>: <code>}</code></li>
-                <li><strong>inteiro</strong>: <code>int</code></li>
-                <li><strong>real</strong>: <code>float</code></li>
-                <li><strong>caracter</strong>: <code>char</code></li>
-                <li><strong>igual</strong>: <code>=</code></li>
-                <li><strong>se</strong>: <code>if</code></li>
-                <li><strong>entao</strong>: <code>{</code></li>
-                <li><strong>senao</strong>: <code>} else {</code></li>
-                <li><strong>fimse</strong>: <code>}</code></li>
-                <li><strong>leia</strong>: <code>cin >></code></li>
-                <li><strong>escreva</strong>: <code>cout <<</code></li>
-                <li><strong>maiorigual</strong>: <code>&gt;=</code></li>
-                <li><strong>menorigual</strong>: <code>&lt;=</code></li>
-                <li><strong>diferente</strong>: <code>!=</code></li>
-                <li><strong>igual</strong>: <code>==</code></li>
-                <li><strong>e</strong>: <code>&&</code></li>
-                <li><strong>ou</strong>: <code>||</code></li>
-                <li><strong>verdadeiro</strong>: <code>true</code></li>
-                <li><strong>falso</strong>: <code>false</code></li>
-                <li><strong>enquanto</strong>: <code>while</code></li>
-                <li><strong>fimenquanto</strong>: <code>}</code></li>
-                <li><strong>para</strong>: <code>for</code></li>
-                <li><strong>fimpara</strong>: <code>}</code></li>
-                <li><strong>repita</strong>: <code>do</code></li>
-                <li><strong>ate</strong>: <code>while</code></li>
-                <li><strong>fimumrepita</strong>: <code>}</code></li>
-                <li><strong>retorne</strong>: <code>return</code></li>
-                <li><strong>mod</strong>: <code>%</code></li>
-                <li><strong>somar</strong>: <code>+</code></li>
-                <li><strong>subtrair</strong>: <code>-</code></li>
-                <li><strong>multiplicar</strong>: <code>*</code></li>
-                <li><strong>dividir</strong>: <code>/</code></li>
-            </ul>
-        </div>
-        
 
-        <!-- Container Principal -->
+        <!-- Biblioteca de Tokens no lado esquerdo -->
+        <div class="token-library">
+            <h2>Biblioteca de Tokens</h2>
+            <div class="tokens">
+                {% for token in tokens %}
+                    <span class="token-item">{{ token.token }} := {{ token.translation }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Container Principal Centralizado -->
         <div class="container">
             <h1>Compilador Portugol para C++</h1>
-            <form id="portugolForm">
-                <textarea id="portugol_code" name="portugol_code" rows="10" cols="50" placeholder="Digite seu código em Portugol aqui..."></textarea><br>
-                <button type="submit">Compilar</button>
-            </form>
+            <div class="editor-container">
+                <form id="portugolForm">
+                    <textarea id="portugol_code" name="portugol_code" rows="20" placeholder="Digite seu código em Portugol aqui..."></textarea>
+                </form>
+                <button id="compileButton" type="button"><i class="fas fa-code"></i> Compilar</button>
+            </div>
 
             <h2>Resultado:</h2>
             <pre id="c_code"></pre>
@@ -64,13 +39,12 @@
         </div>
     </div>
     <footer class="credits">
-        <p>Desenvolvido por: <strong>Walace Sousa, Vinicius Machado, Felipe Medola, joão Takamori</strong></p>
-        <p><a href="https://github.com/WalaceLuisSousa/CompiladorPortugolC-" target="_blank">Repositorio do Compilador</a></p>
+        <p>Desenvolvido por: <strong>Walace Sousa, Vinicius Machado, Felipe Medola, João Takamori</strong></p>
+        <p><a href="https://github.com/WalaceLuisSousa/CompiladorPortugolC-" target="_blank">Repositório do Compilador</a></p>
     </footer>
     <script>
-        document.getElementById('portugolForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
+        // Evento de clique no botão Compilar
+        document.getElementById('compileButton').addEventListener('click', function() {
             let portugolCode = document.getElementById('portugol_code').value;
 
             fetch('/compile', {
@@ -91,6 +65,12 @@
                 }
             })
             .catch(error => console.error('Erro:', error));
+        });
+
+        // Permitir a submissão do formulário pressionando Enter
+        document.getElementById('portugolForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('compileButton').click();
         });
     </script>
 </body>
