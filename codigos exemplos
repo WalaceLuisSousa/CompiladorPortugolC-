@@ -1,0 +1,25 @@
+codigo 1 >>>
+
+inicio
+    inteiro a, b
+    leia a, b
+
+    se (a >= b e b != 0) entao
+        escreva 'Condicional verdadeira'
+    senao
+        escreva 'Condicional falsa'
+    fimse
+fim
+
+
+codigo 2 >>>
+
+inicio
+    inteiro a, b, soma
+    escreva "Digite dois números: "
+    leia a, b
+    soma <- a + b
+    escreva "A soma é: ", soma
+fim
+
+

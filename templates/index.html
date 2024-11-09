@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compilador Portugol para C++</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="layout">
+        <!-- Legenda -->
+        <div class="legend">
+            <h2>Legenda</h2>
+            <p>Abaixo estão as palavras-chave do Portugol e suas equivalentes em C++:</p>
+            <ul>
+                <li><strong>inicio</strong>: <code>int main() {</code></li>
+                <li><strong>fim</strong>: <code>}</code></li>
+                <li><strong>inteiro</strong>: <code>int</code></li>
+                <li><strong>real</strong>: <code>float</code></li>
+                <li><strong>caracter</strong>: <code>char</code></li>
+                <li><strong>igual</strong>: <code>=</code></li>
+                <li><strong>se</strong>: <code>if</code></li>
+                <li><strong>entao</strong>: <code>{</code></li>
+                <li><strong>senao</strong>: <code>} else {</code></li>
+                <li><strong>fimse</strong>: <code>}</code></li>
+                <li><strong>leia</strong>: <code>cin >></code></li>
+                <li><strong>escreva</strong>: <code>cout <<</code></li>
+                <li><strong>maiorigual</strong>: <code>&gt;=</code></li>
+                <li><strong>menorigual</strong>: <code>&lt;=</code></li>
+                <li><strong>diferente</strong>: <code>!=</code></li>
+                <li><strong>igual</strong>: <code>==</code></li>
+                <li><strong>e</strong>: <code>&&</code></li>
+                <li><strong>ou</strong>: <code>||</code></li>
+                <li><strong>verdadeiro</strong>: <code>true</code></li>
+                <li><strong>falso</strong>: <code>false</code></li>
+                <li><strong>enquanto</strong>: <code>while</code></li>
+                <li><strong>fimenquanto</strong>: <code>}</code></li>
+                <li><strong>para</strong>: <code>for</code></li>
+                <li><strong>fimpara</strong>: <code>}</code></li>
+                <li><strong>repita</strong>: <code>do</code></li>
+                <li><strong>ate</strong>: <code>while</code></li>
+                <li><strong>fimumrepita</strong>: <code>}</code></li>
+                <li><strong>retorne</strong>: <code>return</code></li>
+                <li><strong>mod</strong>: <code>%</code></li>
+                <li><strong>somar</strong>: <code>+</code></li>
+                <li><strong>subtrair</strong>: <code>-</code></li>
+                <li><strong>multiplicar</strong>: <code>*</code></li>
+                <li><strong>dividir</strong>: <code>/</code></li>
+            </ul>
+        </div>
+        
+
+        <!-- Container Principal -->
+        <div class="container">
+            <h1>Compilador Portugol para C++</h1>
+            <form id="portugolForm">
+                <textarea id="portugol_code" name="portugol_code" rows="10" cols="50" placeholder="Digite seu código em Portugol aqui..."></textarea><br>
+                <button type="submit">Compilar</button>
+            </form>
+
+            <h2>Resultado:</h2>
+            <pre id="c_code"></pre>
+            <div id="error_messages" class="errors"></div> 
+        </div>
+    </div>
+    <footer class="credits">
+        <p>Desenvolvido por: <strong>Walace Sousa, Vinicius Machado, Felipe Medola, joão Takamori</strong></p>
+        <p><a href="https://www.linkedin.com/in/joaosilva" target="_blank">Repositorio do Compilador</a></p>
+    </footer>
+    <script>
+        document.getElementById('portugolForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let portugolCode = document.getElementById('portugol_code').value;
+
+            fetch('/compile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'portugol_code=' + encodeURIComponent(portugolCode)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.errors) {
+                    document.getElementById('c_code').textContent = '';
+                    document.getElementById('error_messages').innerHTML = data.errors.join('<br>');
+                } else {
+                    document.getElementById('error_messages').innerHTML = '';
+                    document.getElementById('c_code').textContent = data.c_code;
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        });
+    </script>
+</body>
+</html>
